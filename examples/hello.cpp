@@ -9,5 +9,6 @@ int main() {
 
     cout << "Privit! Moie chislo: " << chislo << endl;
 
+
     return 0;
 }
