@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
         <h1>Калькулятор теорії ймовірностей</h1>
         <p class="subtitle">Введіть вашу вибірку через кому, щоб отримати повний розрахунок</p>
@@ -15,8 +14,9 @@
         <div class="input-section">
             <textarea id="dataInput" placeholder="Наприклад: 2, 5, 8, 2, 10, 5"></textarea>
             <button id="calculateBtn">Розрахувати аналіз</button>
+            <button id="clearBtn" style="background-color: #e74c3c; margin-top: 10px;">Очистити</button>
         </div>
-        <button id="clearBtn" style="background-color: #e74c3c; margin-top: 10px;">Очистити</button>
+
         <div class="results-section">
             <div class="result-card">
                 <h3>Варіаційний ряд</h3>
@@ -37,6 +37,7 @@
                     <p id="modeVal">—</p>
                 </div>
             </div>
+
             <div class="result-grid">
                 <div class="result-card">
                     <h4>Дисперсія</h4>
@@ -47,23 +48,24 @@
                     <p id="stdDevVal">—</p>
                 </div>
             </div>
+
             <div class="result-card">
                 <h3>Частотна таблиця</h3>
                 <div id="frequencyTable">Тут з'явиться таблиця</div>
             </div>
         </div>
+
         <div class="theory-section">
             <hr>
             <h3>Довідник термінів</h3>
             <ul>
-                <li><strong>Варіаційний ряд</strong> — це вибірка, в якій елементи розміщені у порядку зростання.</li>
+                <li><strong>Варіаційний ряд</strong> — це вибірка, розміщена у порядку зростання.</li>
                 <li><strong>Медіана</strong> — число, яке ділить навпіл впорядковану вибірку.</li>
-                <li><strong>Мода</strong> — значення, яке зустрічається у вибірці найчастіше.</li>
+                <li><strong>Мода</strong> — значення, яке зустрічається найчастіше.</li>
             </ul>
         </div>
     </div>
 
-    <!-- Підключаємо файл з логікою  -->
     <script src="script.js"></script>
 </body>
 </html>
