@@ -1,0 +1,122 @@
+/* Основні налаштування */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* Поле вводу */
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Щоб падінги не розширювали поле */
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+/* Блоки результатів */
+.results-section {
+    margin-top: 40px;
+}
+
+.result-card {
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+/* Додаємо градієнт на фон та покращуємо кнопку */
+body {
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); /* М'який блакитний градієнт */
+    min-height: 100vh;
+}
+
+.container {
+    border-top: 5px solid #3498db; /* Синя полоска зверху для акценту */
+}
+
+button {
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.result-card h3, .result-card h4 {
+    margin-top: 0;
+    color: #34495e;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* Стиль для цифр, які буде виводити Ліза */
+#sortedRow, #meanVal, #medianVal, #modeVal {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2ecc71; /* Зелений колір для результатів */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
