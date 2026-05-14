@@ -1,111 +1,62 @@
 document.getElementById('calculateBtn').addEventListener('click', function () {
     let input = document.getElementById('dataInput').value;
-    if (input === "") {
+
+    if (input.trim() === "") {
         alert("Будь ласка, введіть числа!");
-    } else {
-        console.log("Дані отримано: " + input);
-        // Функція парсингу рядка в масив чисел
-        function parseInput(inputString) {
-            let numbers = [];
-            let parts = inputString.split(",");
-
-            for (let i = 0; i < parts.length; i++) {
-                let num = parseFloat(parts[i].trim());
-                if (!isNaN(num)) {
-                    numbers.push(num);
-                }
-            }
-            return numbers;
-        }
-
-        // Функція створення варіаційного ряду
-        function getSortedSeries(arr) {
-            let sorted = [...arr];
-            return sorted.sort((a, b) => a - b);
-        }
-
-        // Перевірка в консолі
-        let testInput = "10, 5, 8, 1, 3";
-        let parsedData = parseInput(testInput);
-        console.log("Варіаційний ряд:", getSortedSeries(parsedData));
-
-        // Знаходимо середнє значення
-        function getMean(arr) {
-            let sum = 0;
-            for (let i = 0; i < arr.length; i++) {
-                sum += arr[i];
-            }
-            return sum / arr.length;
-        }
-
-        // Знаходимо медіану (використовуємо вже відсортований масив)
-        function getMedian(sortedArr) {
-            let middle = Math.floor(sortedArr.length / 2);
-
-            if (sortedArr.length % 2 !== 0) {
-                return sortedArr[middle]; // Якщо кількість непарна — беремо число посередині
-            } else {
-                return (sortedArr[middle - 1] + sortedArr[middle]) / 2; // Якщо парна — середнє двох чисел
-            }
-        }
-
-        // Знаходимо моду (число, що зустрічається найчастіше)
-        function getMode(arr) {
-            let counts = {};
-            let maxCount = 0;
-            let modes = [];
-
-            for (let i = 0; i < arr.length; i++) {
-                let num = arr[i];
-                counts[num] = (counts[num] || 0) + 1;
-                if (counts[num] > maxCount) {
-                    maxCount = counts[num];
-                }
-            }
-
-            for (let num in counts) {
-                if (counts[num] === maxCount) {
-                    modes.push(Number(num));
-                }
-            }
-            return modes;
-        }
-
-        // Дисперсія
-        function getVariance(arr) {
-            let mean = getMean(arr);
-            let sumOfSquares = 0;
-
-            for (let i = 0; i < arr.length; i++) {
-                sumOfSquares += Math.pow(arr[i] - mean, 2);
-            }
-            return sumOfSquares / arr.length;
-        }
-
-        // Середнє квадратичне відхилення
-        function getStandardDeviation(arr) {
-            return Math.sqrt(getVariance(arr));
-        }
-
-        function getFrequencyTable(arr) {
-            let frequency = {};
-            for (let i = 0; i < arr.length; i++) {
-                let num = arr[i];
-                frequency[num] = (frequency[num] || 0) + 1;
-            }
-            return frequency;
-        }
-
-        let finalData = parseInput("10, 5, 8, 1, 3, 5"); // Тестові дані
-        let sorted = getSortedSeries(finalData);
-
-        console.log("--- Результати розрахунків ---");
-        console.log("Варіаційний ряд:", sorted);
-        console.log("Середнє арифметичне:", getMean(finalData));
-        console.log("Медіана:", getMedian(sorted));
-        console.log("Мода:", getMode(finalData));
-        console.log("Дисперсія:", getVariance(finalData));
-        console.log("Квадратичне відхилення:", getStandardDeviation(finalData));
-        console.log("Частотна таблиця:", getFrequencyTable(finalData));
+        return;
     }
+
+    // 1. Парсинг
+    let numbers = input.split(",").map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+
+    if (numbers.length === 0) {
+        alert("Введіть коректні числа через кому!");
+        return;
+    }
+
+    // 2. Розрахунки
+    let sorted = [...numbers].sort((a, b) => a - b);
+
+    // Середнє
+    let sum = numbers.reduce((a, b) => a + b, 0);
+    let mean = sum / numbers.length;
+
+    // Медіана
+    let mid = Math.floor(sorted.length / 2);
+    let median = sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+
+    // Мода
+    let counts = {};
+    let maxFreq = 0;
+    numbers.forEach(n => {
+        counts[n] = (counts[n] || 0) + 1;
+        if (counts[n] > maxFreq) maxFreq = counts[n];
+    });
+    let modes = Object.keys(counts).filter(n => counts[n] === maxFreq);
+
+    // Дисперсія та відхилення
+    let variance = numbers.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / numbers.length;
+    let stdDev = Math.sqrt(variance);
+
+    // 3. Вивід на екран
+    document.getElementById('sortedRow').innerText = sorted.join(", ");
+    document.getElementById('meanVal').innerText = mean.toFixed(2);
+    document.getElementById('medianVal').innerText = median;
+    document.getElementById('modeVal').innerText = modes.join(", ");
+    document.getElementById('varianceVal').innerText = variance.toFixed(2);
+    document.getElementById('stdDevVal').innerText = stdDev.toFixed(2);
+
+    // Частотна таблиця
+    let tableHTML = "<table><tr><th>Число</th><th>Частота</th></tr>";
+    for (let num in counts) {
+        tableHTML += `<tr><td>${num}</td><td>${counts[num]}</td></tr>`;
+    }
+    tableHTML += "</table>";
+    document.getElementById('frequencyTable').innerHTML = tableHTML;
+});
+
+// Очистка
+document.getElementById('clearBtn').addEventListener('click', function () {
+    document.getElementById('dataInput').value = "";
+    location.reload();
 });
